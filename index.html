@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-HK">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>HKSports+｜網站即將上線</title>
+<meta name="description" content="HKSports+ 網站正在籌備中，即將上線。">
+<meta name="theme-color" content="#0c0c0d">
+<meta name="color-scheme" content="dark">
+<meta property="og:title" content="HKSports+｜網站即將上線">
+<meta property="og:description" content="HKSports+ 網站正在籌備中，即將上線。">
+<meta property="og:type" content="website">
+<meta property="og:image" content="assets/apple-touch-icon.png">
+<link rel="icon" href="assets/favicon.png" type="image/png">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<style>
+  :root {
+    color-scheme: dark;
+    --bg: #0c0c0d;
+    --ink: #f5f5f2;
+    --muted: #9a9a94;
+    --line: #26262a;
+    --lime: #d8dc1e;
+    --edge: clamp(20px, 5vw, 72px);
+    --sans: "Helvetica Neue", Helvetica, Arial, "PingFang HK", "PingFang TC",
+            "Noto Sans HK", "Noto Sans TC", "Microsoft JhengHei", sans-serif;
+  }
+  * { box-sizing: border-box; margin: 0; }
+  html, body { height: 100%; }
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--sans);
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  .page {
+    position: relative;
+    min-height: 100svh;
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    padding: clamp(20px, 3.5vh, 40px) var(--edge);
+    isolation: isolate;
+    overflow: clip;
+  }
+
+  /* The plus from the logo, set large behind the page */
+  .plus {
+    position: absolute;
+    inset-block: 0;
+    right: var(--edge);
+    width: min(62vh, 46vw);
+    margin-block: auto;
+    aspect-ratio: 1;
+    z-index: -1;
+    transform: skewX(-12deg);
+    background:
+      linear-gradient(var(--lime), var(--lime)) center / 100% 22% no-repeat,
+      linear-gradient(var(--lime), var(--lime)) center / 22% 100% no-repeat;
+    opacity: .08;
+  }
+
+  .bar, .foot {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    font-size: 13px;
+    letter-spacing: .08em;
+    color: var(--muted);
+  }
+  .bar { padding-bottom: 20px; border-bottom: 1px solid var(--line); }
+  .foot { padding-top: 20px; border-top: 1px solid var(--line); }
+  .status { display: inline-flex; align-items: center; gap: 10px; color: var(--ink); }
+  .status::before {
+    content: "";
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--lime);
+  }
+
+  main {
+    display: grid;
+    align-content: center;
+    justify-items: start;
+    gap: clamp(20px, 3.4vh, 36px);
+    padding-block: clamp(32px, 6vh, 72px);
+  }
+  .logo {
+    display: block;
+    width: clamp(128px, 20vh, 208px);
+    height: auto;
+    border-radius: 50%;
+    box-shadow: 0 0 0 1px var(--line);
+  }
+  .en {
+    font-size: clamp(14px, 1.3vw, 18px);
+    font-weight: 700;
+    font-style: italic;
+    letter-spacing: .28em;
+    text-transform: uppercase;
+    color: var(--lime);
+  }
+  h1 {
+    font-size: clamp(44px, 9.4vw, 148px);
+    font-weight: 800;
+    line-height: 1.04;
+    letter-spacing: -.01em;
+    text-wrap: balance;
+  }
+  .lede {
+    max-width: 30em;
+    font-size: clamp(16px, 1.35vw, 20px);
+    line-height: 1.7;
+    color: var(--muted);
+    text-wrap: balance;
+  }
+
+  /* Entrance: plays once, only when motion is welcome */
+  @media (prefers-reduced-motion: no-preference) {
+    .logo, .en, h1, .lede {
+      animation: rise .7s cubic-bezier(.2, .7, .2, 1) both;
+    }
+    .en   { animation-delay: .08s; }
+    h1    { animation-delay: .16s; }
+    .lede { animation-delay: .28s; }
+    .plus { animation: plus 1.2s cubic-bezier(.2, .7, .2, 1) both; }
+  }
+  @keyframes rise {
+    from { opacity: 0; translate: 0 18px; }
+  }
+  @keyframes plus {
+    from { opacity: 0; scale: .92; }
+  }
+
+  @media (max-width: 640px) {
+    .plus { width: 78vw; right: -18vw; inset-block: auto 14vh; }
+    .bar, .foot { font-size: 12px; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="plus" aria-hidden="true"></div>
+
+  <header class="bar">
+    <span>HKSPORTS+</span>
+    <span class="status">網站籌備中</span>
+  </header>
+
+  <main>
+    <img class="logo" src="assets/logo.png" alt="HKSports+" width="320" height="320" fetchpriority="high">
+    <p class="en" lang="en">Coming soon</p>
+    <h1>網站即將上線</h1>
+    <p class="lede">HKSports+ 網站正在籌備中，很快與你見面，敬請期待。</p>
+  </main>
+
+  <footer class="foot">
+    <span>© 2026 HKSports+</span>
+    <span lang="en">Hong Kong</span>
+  </footer>
+</div>
+</body>
+</html>
