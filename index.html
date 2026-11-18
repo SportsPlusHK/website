@@ -1,164 +1,253 @@
-<!DOCTYPE html>
-<html lang="zh-Hant-HK">
+<!doctype html>
+<html lang="zh-Hant-HK" data-type="service" data-radius="soft" data-buttons="arrow" data-motion>
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>HKSports+｜網站即將上線</title>
-<meta name="description" content="HKSports+ 網站正在籌備中，即將上線。">
-<meta name="theme-color" content="#0c0c0d">
-<meta name="color-scheme" content="dark">
-<meta property="og:title" content="HKSports+｜網站即將上線">
-<meta property="og:description" content="HKSports+ 網站正在籌備中，即將上線。">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>SportsPlus HK 網站預覽 v3</title>
+<meta name="description" content="SportsPlus HK 為兒童及青少年、成人、學校機構和運動員開辦體能及重量訓練課程，教練到學校或租用的運動場地授課。">
 <meta property="og:type" content="website">
-<meta property="og:image" content="assets/apple-touch-icon.png">
+<meta property="og:title" content="HKSports+：香港體能及重量訓練課程">
+<meta property="og:description" content="兒童、成人、學校及運動員的體能及重量訓練課程，到校或在租用場地上課。">
+<meta property="og:image" content="share.jpg">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="assets/favicon.png" type="image/png">
 <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<meta name="theme-color" content="#f4f4ef">
+<!-- <link rel="canonical" href="https://sportsplus.com.hk/"> : turn on when the site goes live on this domain -->
+<meta name="site-kind" content="other">
+<meta name="page-type" content="service">
+<link rel="preload" href="assets/fonts/figtree-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="assets/fonts/fonts.css">
+<link rel="stylesheet" href="assets/system.css">
+<link rel="stylesheet" href="assets/ui/cards.css">
+<link rel="stylesheet" href="assets/motion/motion.css">
+<link rel="stylesheet" href="assets/backgrounds/backgrounds.css">
+<link rel="stylesheet" href="assets/layout/layout.css">
+<link rel="stylesheet" href="assets/icons/icon.css">
 <style>
-  :root {
-    color-scheme: dark;
-    --bg: #0c0c0d;
-    --ink: #f5f5f2;
-    --muted: #9a9a94;
-    --line: #26262a;
-    --lime: #d8dc1e;
-    --edge: clamp(20px, 5vw, 72px);
-    --sans: "Helvetica Neue", Helvetica, Arial, "PingFang HK", "PingFang TC",
-            "Noto Sans HK", "Noto Sans TC", "Microsoft JhengHei", sans-serif;
-  }
-  * { box-sizing: border-box; margin: 0; }
-  html, body { height: 100%; }
-  body {
-    background: var(--bg);
-    color: var(--ink);
-    font-family: var(--sans);
-    -webkit-font-smoothing: antialiased;
-    overflow-x: hidden;
-  }
-
-  .page {
-    position: relative;
-    min-height: 100svh;
-    display: grid;
-    grid-template-rows: auto 1fr auto;
-    padding: clamp(20px, 3.5vh, 40px) var(--edge);
-    isolation: isolate;
-    overflow: clip;
-  }
-
-  /* The plus from the logo, set large behind the page */
-  .plus {
-    position: absolute;
-    inset-block: 0;
-    right: var(--edge);
-    width: min(62vh, 46vw);
-    margin-block: auto;
-    aspect-ratio: 1;
-    z-index: -1;
-    transform: skewX(-12deg);
-    background:
-      linear-gradient(var(--lime), var(--lime)) center / 100% 22% no-repeat,
-      linear-gradient(var(--lime), var(--lime)) center / 22% 100% no-repeat;
-    opacity: .08;
-  }
-
-  .bar, .foot {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 16px;
-    font-size: 13px;
-    letter-spacing: .08em;
-    color: var(--muted);
-  }
-  .bar { padding-bottom: 20px; border-bottom: 1px solid var(--line); }
-  .foot { padding-top: 20px; border-top: 1px solid var(--line); }
-  .status { display: inline-flex; align-items: center; gap: 10px; color: var(--ink); }
-  .status::before {
-    content: "";
-    width: 8px; height: 8px; border-radius: 50%;
-    background: var(--lime);
-  }
-
-  main {
-    display: grid;
-    align-content: center;
-    justify-items: start;
-    gap: clamp(20px, 3.4vh, 36px);
-    padding-block: clamp(32px, 6vh, 72px);
-  }
-  .logo {
-    display: block;
-    width: clamp(128px, 20vh, 208px);
-    height: auto;
-    border-radius: 50%;
-    box-shadow: 0 0 0 1px var(--line);
-  }
-  .en {
-    font-size: clamp(14px, 1.3vw, 18px);
-    font-weight: 700;
-    font-style: italic;
-    letter-spacing: .28em;
-    text-transform: uppercase;
-    color: var(--lime);
-  }
-  h1 {
-    font-size: clamp(44px, 9.4vw, 148px);
-    font-weight: 800;
-    line-height: 1.04;
-    letter-spacing: -.01em;
-    text-wrap: balance;
-  }
-  .lede {
-    max-width: 30em;
-    font-size: clamp(16px, 1.35vw, 20px);
-    line-height: 1.7;
-    color: var(--muted);
-    text-wrap: balance;
-  }
-
-  /* Entrance: plays once, only when motion is welcome */
-  @media (prefers-reduced-motion: no-preference) {
-    .logo, .en, h1, .lede {
-      animation: rise .7s cubic-bezier(.2, .7, .2, 1) both;
-    }
-    .en   { animation-delay: .08s; }
-    h1    { animation-delay: .16s; }
-    .lede { animation-delay: .28s; }
-    .plus { animation: plus 1.2s cubic-bezier(.2, .7, .2, 1) both; }
-  }
-  @keyframes rise {
-    from { opacity: 0; translate: 0 18px; }
-  }
-  @keyframes plus {
-    from { opacity: 0; scale: .92; }
-  }
-
-  @media (max-width: 640px) {
-    .plus { width: 78vw; right: -18vw; inset-block: auto 14vh; }
-    .bar, .foot { font-size: 12px; }
+:root {
+  --p-bg: #f4f4ef; --p-surface: #e7e7e2; --p-ink: #151514; --p-muted: #60605e;
+  --p-accent: #d8dc1e; --p-accent-ink: #111111; --p-action: #151514; --p-action-ink: #f4f4ef;
+  --p-inv-bg: #151514; --p-inv-surface: #212120; --p-inv-ink: #f4f4ef; --p-inv-muted: #969693;
+  --p-inv-accent: #d8dc1e; --p-inv-accent-ink: #111111; --p-inv-action: #d8dc1e; --p-inv-action-ink: #111111;
+  --font-display: "Figtree", "PingFang HK", "PingFang TC", "Noto Sans HK", "Noto Sans CJK TC", "Microsoft JhengHei", sans-serif;
+  --font-text: "Figtree", "PingFang HK", "PingFang TC", "Noto Sans HK", "Noto Sans CJK TC", "Microsoft JhengHei", sans-serif;
+  --display-weight: 400;
+  --display-tracking: -0.025em;
+  --display-tracking-xl: -0.035em;
+}
+</style>
+<script>document.documentElement.classList.add('m-enter');setTimeout(()=>document.documentElement.classList.add('m-enter-done'),700)</script>
+<script src="assets/backgrounds/backgrounds.js"></script>
+<script>document.documentElement.classList.add('mo-js');setTimeout(()=>document.documentElement.classList.add('mo-safe'),2500)</script>
+<link rel="modulepreload" href="assets/moments/moments.js">
+<link rel="modulepreload" href="assets/moments/lib.js">
+<link rel="modulepreload" href="assets/moments/word-highlight/moment.js">
+<style>
+  /* page CSS: the client's round badge beside the name, the step photographs' height, the statement's phrases */
+  .nav__logo .logo-badge { width: 36px; height: 36px; border-radius: 50%; flex: none; }
+  #steps .panel { --p-h: clamp(240px, calc(100svh - 470px), 440px); }
+  /* the statement's phrases are split by spaces for the word-highlight moment; Chinese sets no visible space */
+  #venues .mo-wh__text { word-spacing: -0.25em; }
+  /* the enquiry photograph fills the column under the words, down to the form's foot */
+  #enquire .grid { align-items: stretch; }
+  @media (min-width: 1024px) { #enquire .wrap { height: 100%; display: flex; flex-direction: column; } #enquire .wrap > .grid { flex: 1 1 auto; } }
+  .enquiry__side { display: flex; flex-direction: column; gap: var(--s-6); }
+  .enquiry__photo { flex: 1 1 0; min-height: 240px; }
+  .enquiry__form { background: var(--surface); padding: var(--s-7); border-radius: var(--r-lg); }
+  /* three steps stay three across from 640, the photographs shorter on the tablet */
+  @media (min-width: 640px) and (max-width: 1279px) { #steps .grid > .span-4 { grid-column: span 4; } }
+  @media (min-width: 640px) and (max-width: 1023px) { #steps .panel { --p-h: 420px; } }
+  @media (max-width: 1023px) { .enquiry__photo { flex: none; height: 200px; } .enquiry__form { background: none; padding: 0; border-radius: 0; } }
+  /* the phone: the classes list on screen one, its photograph on screen two; taller photographs in two-screen sections */
+  @media (max-width: 639px) {
+    #classes .wrap > .grid { display: contents; }
+    #classes .frame--fill { align-self: stretch; height: auto; }
+    #steps .panel { --p-h: max(200px, calc((200lvh - 780px) / 3)); }
+    #enquire .wrap { height: 100%; display: flex; flex-direction: column; }
+    #enquire .wrap > .grid { flex: 1 1 auto; display: flex; flex-direction: column; }
+    .enquiry__side { flex: 1 1 auto; }
+    .enquiry__photo { flex: 1 1 0; height: auto; min-height: 280px; }
   }
 </style>
 </head>
 <body>
-<div class="page">
-  <div class="plus" aria-hidden="true"></div>
+<!-- type: service (strength and conditioning coaching; classes at schools and rented venues)
+     deal: hero split, nav nav-centre, close close-photo, footer footer-columns, rhythm surface-pairs (steps on .ground-surface),
+           buttons arrow (re-dealt: tonal secondary stood 1.2:1 off this ground), mark wordmark replaced by the client's own badge (logo.png), grounds none (kind other)
+     palette: the client's own colours from the logo (start.mjs brand): logo black as ink, lime on dark grounds only
+     type: figtree (newsreader, the first pairing, is a serif that clashes with the logo's italic sans); Noto Sans HK for the Chinese text
+     moments: word-highlight in #venues -->
 
-  <header class="bar">
-    <span>HKSPORTS+</span>
-    <span class="status">網站籌備中</span>
-  </header>
+<header class="nav nav--centre">
+  <div class="wrap nav__bar">
+    <a class="skip-link" href="#top">跳到內容</a>
+    <a class="nav__logo" href="#top"><img class="logo-badge" src="assets/logo.png" alt="" width="36" height="36">HKSports+</a>
+    <nav class="nav__links" aria-label="主選單">
+      <div class="nav__item"><a class="nav__link" href="#classes">課程</a></div>
+      <div class="nav__item"><a class="nav__link" href="#venues">場地</a></div>
+      <div class="nav__item"><a class="nav__link" href="#steps">步驟</a></div>
+    </nav>
+    <div class="nav__actions">
+      <a class="btn btn--primary" href="#enquire">電郵查詢課程</a>
+    </div>
+    <button class="nav__toggle" type="button" aria-expanded="false" aria-label="選單">
+      <svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><path d="M2 5h14M2 13h14" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+    </button>
+  </div>
+</header>
 
-  <main>
-    <img class="logo" src="assets/logo.png" alt="HKSports+" width="320" height="320" fetchpriority="high">
-    <p class="en" lang="en">Coming soon</p>
-    <h1>網站即將上線</h1>
-    <p class="lede">HKSports+ 網站正在籌備中，很快與你見面，敬請期待。</p>
-  </main>
+<main id="top">
+  <section class="hero hero--split" data-enter aria-labelledby="hero-h">
+    <div class="wrap"><div class="hero-text grid hero__grid">
+      <div class="hero__text span-5">
+        <h1 id="hero-h">香港體能及重量訓練課程</h1>
+        <p class="hero__lead">為兒童及青少年、成人、學校機構和運動員而設的 4 類課程，教練到學校、機構或租用的運動場地授課。</p>
+        <div class="btn-row"><a class="btn btn--primary" href="#enquire">電郵查詢課程<svg class="m-arrow" viewBox="0 0 12 12" aria-hidden="true"><path class="m-arrow__stem" d="M1 6h8"/><path class="m-arrow__head" d="M4.5 2.5 8 6l-3.5 3.5"/></svg></a><a class="btn btn--secondary" href="#classes">查看課程類別</a></div>
+      </div>
+      <div class="hero__media span-6 start-7">
+        <img src="assets/img/photo-f116285194-1026.webp" srcset="assets/img/photo-f116285194-700.webp 700w, assets/img/photo-f116285194-1026.webp 1026w" sizes="(max-width: 1023px) 100vw, (max-width: 1279px) 50vw, 640px" width="1026" height="1282" alt="健身室內一位學員做硬拉，手握已上槓片的槓鈴" style="--ly-pos: 45% 60%" fetchpriority="high" decoding="async" data-source="stand-in" data-subject="硬拉訓練">
+      </div>
+    </div></div>
+  </section>
 
-  <footer class="foot">
-    <span>© 2026 HKSports+</span>
-    <span lang="en">Hong Kong</span>
-  </footer>
-</div>
+  <section class="section g2m" id="classes" aria-labelledby="classes-h">
+    <div class="wrap">
+      <div class="grid grid--top fill">
+        <div class="span-5">
+          <div class="section-head">
+            <h2 id="classes-h">四類學員的訓練課程</h2>
+            <p>兒童、成人、學校及運動員課程都以體能及重量訓練為主，收費按人數和堂數報價。</p>
+          </div>
+          <ul class="rows">
+            <li><span class="rows__name">兒童及青少年</span><p>家長替子女報名的體能訓練班。</p></li>
+            <li><span class="rows__name">成人</span><p>個人報名，學習體能及重量訓練。</p></li>
+            <li><span class="rows__name">學校及機構</span><p>學校、大學、企業或社福機構聘請教練到場授課。</p></li>
+            <li><span class="rows__name">運動員及校隊</span><p>為參加比賽的運動員和校隊而設。</p></li>
+          </ul>
+          <p class="classes__more"><a class="link" href="#steps">查看報名步驟</a></p>
+        </div>
+        <div class="frame frame--photo frame--fill span-6 start-7">
+          <img class="frame__img" src="assets/img/photo-f116285786-1026.webp" srcset="assets/img/photo-f116285786-700.webp 700w, assets/img/photo-f116285786-1026.webp 1026w" sizes="(max-width: 1023px) 100vw, (max-width: 1279px) 50vw, 640px" width="1026" height="1282" alt="學員在深蹲架前把槓鈴放上肩膀" loading="lazy" decoding="async" data-source="stand-in" data-subject="深蹲訓練">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section statement" id="venues" data-moment="word-highlight" aria-label="上課地點">
+    <div class="wrap">
+      <p class="t-label">上課地點</p>
+      <p class="mo-wh__text">我們沒有 自己的 訓練中心。 學校和機構的課， 在你們的 場地上； 兒童、青少年 和成人班， 在我們租用的 運動場地 上課。</p>
+    </div>
+  </section>
+
+  <section class="section ground-surface" id="steps" style="--hm: 2" aria-labelledby="steps-h">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 id="steps-h">報名上課的 3 個步驟</h2>
+      </div>
+      <div class="grid">
+        <article class="card card--row card--open span-4">
+          <span class="step-num">1</span>
+          <h3>電郵告訴我們學員和場地</h3>
+          <p>寫明學員類別、人數和上課地區。</p>
+          <div class="panel"><img class="frame__img" src="assets/img/photo-f5786144-960.webp" srcset="assets/img/photo-f5786144-640.webp 640w, assets/img/photo-f5786144-960.webp 960w" sizes="(max-width: 1023px) 100vw, 660px" width="960" height="720" alt="學校運動場的跑道起點" loading="lazy" decoding="async" data-source="stand-in" data-subject="學校運動場的跑道起點"></div>
+        </article>
+        <article class="card card--row card--open span-4">
+          <span class="step-num">2</span>
+          <h3>收到課程安排和報價</h3>
+          <p>我們按你的資料回覆課程內容和收費。</p>
+          <div class="panel"><img class="frame__img" src="assets/img/photo-f65498798-960.webp" srcset="assets/img/photo-f65498798-640.webp 640w, assets/img/photo-f65498798-960.webp 960w" sizes="(max-width: 1023px) 100vw, 660px" width="960" height="721" alt="健身室架上分類擺放的槓片" loading="lazy" decoding="async" data-source="stand-in" data-subject="健身室架上分類擺放的槓片"></div>
+        </article>
+        <article class="card card--row card--open span-4">
+          <span class="step-num">3</span>
+          <h3>教練到場上課</h3>
+          <p>在學校、機構或我們租用的場地開課。</p>
+          <div class="panel"><img class="frame__img" src="assets/img/photo-f94843216-960.webp" srcset="assets/img/photo-f94843216-640.webp 640w, assets/img/photo-f94843216-960.webp 960w" sizes="(max-width: 1023px) 100vw, 660px" width="960" height="641" alt="學員雙手各握一個啞鈴" loading="lazy" style="object-position: 50% 60%" decoding="async" data-source="stand-in" data-subject="學員雙手各握一個啞鈴"></div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="enquire" style="--hm: 2" aria-labelledby="enquire-h">
+    <div class="wrap">
+      <div class="grid grid--top">
+        <div class="span-5 enquiry__side">
+          <div class="section-head">
+            <h2 id="enquire-h">課程查詢表格</h2>
+            <p>填好表格後按「電郵查詢課程」，你的電郵程式會開啟一封寫好資料的郵件，寄出即可。</p>
+          </div>
+          <div class="frame frame--photo enquiry__photo">
+            <img class="frame__img" src="assets/img/photo-f141589693-900.webp" srcset="assets/img/photo-f141589693-600.webp 600w, assets/img/photo-f141589693-900.webp 900w" sizes="(max-width: 1023px) 100vw, 520px" width="900" height="1348" alt="學員舉起槓鈴做肩上推舉，從背後看" loading="lazy" decoding="async" style="object-position: 50% 30%" data-source="stand-in" data-subject="肩上推舉">
+          </div>
+        </div>
+        <div class="span-6 start-7 enquiry__form">
+          <form class="form enquiry" action="mailto:hello@sportsplus.example" method="post" enctype="text/plain" data-endpoint="" data-sent="你的課程查詢已寄出。" novalidate>
+            <div class="field"><label for="f-name">姓名</label>
+              <input id="f-name" name="name" type="text" autocomplete="name" required aria-describedby="f-name-err">
+              <p class="field__error" id="f-name-err" hidden>請寫上聯絡人的姓名。</p></div>
+            <div class="field"><label for="f-email">電郵</label>
+              <input id="f-email" name="email" type="email" autocomplete="email" inputmode="email" required aria-describedby="f-email-err">
+              <p class="field__error" id="f-email-err" hidden>請寫上有 @ 的電郵地址，例如 name@example.com。</p></div>
+            <div class="field"><label for="f-group">學員類別</label>
+              <select id="f-group" name="group" required aria-describedby="f-group-err">
+                <option value="">請選擇</option>
+                <option>兒童及青少年</option>
+                <option>成人</option>
+                <option>學校及機構</option>
+                <option>運動員及校隊</option>
+              </select>
+              <p class="field__error" id="f-group-err" hidden>請選擇學員類別。</p></div>
+            <div class="field"><label for="f-count">人數</label>
+              <input id="f-count" name="count" type="text" inputmode="numeric" autocomplete="off" required aria-describedby="f-count-err">
+              <p class="field__error" id="f-count-err" hidden>請用數字寫上學員人數。</p></div>
+            <div class="field"><label for="f-area">上課地區</label>
+              <input id="f-area" name="area" type="text" autocomplete="off" required aria-describedby="f-area-err">
+              <p class="field__error" id="f-area-err" hidden>請寫上想上課的地區，例如沙田。</p></div>
+            <div class="btn-row"><button class="btn btn--primary" type="submit">電郵查詢課程</button></div>
+            <p class="form__status" role="status" data-form-status></p>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="footer closing" id="contact" aria-labelledby="close-h">
+  <div class="wrap">
+    <div class="closing__cta close--photo">
+      <div class="section-head--split">
+        <div><h2 id="close-h">查詢體能及重量訓練課程</h2><p class="t-lead">兒童、成人、學校及運動員課程，收費按人數和堂數報價。</p></div>
+        <a class="btn btn--primary" href="#enquire">電郵查詢課程<svg class="m-arrow" viewBox="0 0 12 12" aria-hidden="true"><path class="m-arrow__stem" d="M1 6h8"/><path class="m-arrow__head" d="M4.5 2.5 8 6l-3.5 3.5"/></svg></a>
+      </div>
+      <div class="close__media"><img src="assets/img/photo-f55010972-1280.webp" srcset="assets/img/photo-f55010972-800.webp 800w, assets/img/photo-f55010972-1280.webp 1280w" sizes="(max-width: 639px) 680px, 100vw" width="1280" height="851" alt="放在地上的藥球" loading="lazy" style="--pos: 50% 50%" decoding="async" data-source="stand-in" data-subject="放在地上的藥球"></div>
+    </div>
+    <div class="closing__links">
+      <div class="grid">
+        <div class="span-4 stack-4">
+          <a class="nav__logo" href="#top"><img class="logo-badge" src="assets/logo.png" alt="" width="36" height="36" loading="lazy" decoding="async">HKSports+</a>
+          <p class="footer__lede">香港體能及重量訓練課程</p>
+        </div>
+        <div class="span-2 footer__col"><h3>課程</h3><ul><li><a href="#classes">課程類別</a></li></ul></div>
+        <div class="span-2 footer__col"><h3>場地</h3><ul><li><a href="#venues">上課地點</a></li></ul></div>
+        <div class="span-2 footer__col"><h3>步驟</h3><ul><li><a href="#steps">報名步驟</a></li></ul></div>
+        <div class="span-2 footer__col"><h3>查詢</h3><ul><li><a href="#enquire">查詢表格</a></li></ul></div>
+      </div>
+      <div class="footer__legal">
+        <span>&copy; 2026 SportsPlus HK</span>
+        <div class="socials"></div>
+        <a class="credits" href="credits.html">相片來自 Wikimedia Commons</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<nav class="actionbar" aria-label="快捷操作">
+  <a class="btn btn--primary" href="#enquire">電郵查詢課程</a>
+</nav>
+
+<script type="module" src="assets/system.js"></script>
+<script type="module" src="assets/motion/motion.js"></script>
+<script type="module" src="assets/layout/layout.js"></script>
 </body>
 </html>
